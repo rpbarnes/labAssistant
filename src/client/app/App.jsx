@@ -1,5 +1,6 @@
 import React from 'react';
-import ListModel from './ListModel.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SectionContainer from './SectionContainer.jsx';
 
 
 class App extends React.Component {
@@ -13,7 +14,9 @@ class App extends React.Component {
 
     render () {
         return (
-            <ListModel nameTag='reactList1'/>
+            <MuiThemeProvider>
+                <SectionContainer />
+            </MuiThemeProvider>
         );
     }
 }
