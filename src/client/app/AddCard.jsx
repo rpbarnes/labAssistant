@@ -1,19 +1,24 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 class AddCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             editing: false,
-            text: ''
+            text: '',
+            muiTheme: getMuiTheme({lightBaseTheme})
         }
         this.handleOpen = this.handleOpen.bind(this);
         this.handleDone = this.handleDone.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
+
     }
 
     handleOpen() {
@@ -60,11 +65,11 @@ class AddCard extends React.Component {
         if (this.state.editing) {
             // give a text field and button group with 'Done' and 'Cancel'
             return (
-                <div className='well' onKeyDown={this.handleKeyPress}>
+                <div className='well' style={{backgroundColor: this.state.muiTheme.palette.accent1Color}} onKeyDown={this.handleKeyPress}>
                     <TextField hintText='Add new...' value={this.state.text} multiLine={true} rows={1} onChange={this.handleEdit} onBlur={this.handleClose} />
                     <div>
-                        <FlatButton label='Cancel' onTouchTap={this.handleClose} />
-                        <FlatButton label='Done' onTouchTap={this.handleDone} />
+                        <FlatButton key='Cancel' label='Cancel' onTouchTap={this.handleClose} />
+                        <FlatButton key='Done' label='Done' primary={true} onTouchTap={this.handleDone} />
                     </div>
 
                 </div>
@@ -84,5 +89,5 @@ class AddCard extends React.Component {
     }
 }
 
-export default AddCard
+export default muiThemeable()(AddCard);
 
