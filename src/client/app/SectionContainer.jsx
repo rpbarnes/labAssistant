@@ -23,15 +23,12 @@ class SectionContainer extends React.Component {
 
     handleOpen(key) {
         // Opens DataEntryModal 
-        console.log(key);
         var card = this.state.cards.filter( function(card) { // this returns a list...
             if (card.id === key) {
                 return card;
             } 
         });
         card = card[0];
-        console.log(card);
-        console.log('from open');
         this.setState({
             primaryText: card.text, // why doesn't this update before the next rerender
             secondaryText: card.response,
@@ -77,7 +74,6 @@ class SectionContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state.cards);
         // DataEntryModal doesn't rerendered when I change this.state.primaryText. Lets force it to behave properly... I'm not really sure this is a good way of doing this though...
         //let dataModal = null;
         //if (this.state.modalOpen) {

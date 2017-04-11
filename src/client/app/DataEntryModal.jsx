@@ -9,42 +9,44 @@ class DataEntryModal extends React.Component {
         this.state = {
             open: this.props.open,
             cardRespText: this.props.cardRespText, 
-            cardText: this.props.cardText
+            cardText: this.props.cardText,
+            cTChanged: false,
+            cRTChanged: false
         };
         this.cardTextChanged = this.cardTextChanged.bind(this);
         this.cardRespTextChanged = this.cardRespTextChanged.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.componentWillUpdate = this.componentWillUpdate.bind(this);
-        //console.log(this.props.cardText);
-    }
-
-    componentWillUpdate() {
-        // Constructor doesn't get called on rerender so update the text states so we can keep track of things.
-
     }
 
     cardTextChanged(text) {
         // Actually you should tell SectionContainer about it here and let the SectionContainer setState.
-        this.setState({cardText: text});
+        this.setState({
+            cardText: text,
+            cTChanged: true
+        });
+
     }
 
     cardRespTextChanged(text) {
-        this.setState({cardRespText: text});
-        //console.log(this.state.cardRespText);
+        this.setState({
+            cardRespText: text,
+            cRTChanged: true
+        });
     }
     
     // I'm doing something really stupid but I'm not sure where I'm being stupid... This is a workaround. I think it's probably better to let SectionContainer handle this.
     handleClose() {
-        if (this.state.cardText === '') {
-            var cardText = this.props.cardText;
+        if (this.state.cTChanged) {
+            var cardText = this.state.cardText;
         } else {
-            var cardText = '';
+            var cardText = this.props.cardText;
         }
-        if (this.state.cardRespText === '') {
-            var respText = this.props.cardRespText;
+        if (this.state.cRTChanged) {
+            var respText = this.state.cardRespText;
         }else {
-            var respText = '';
+            var respText = this.props.cardRespText;
         }
+        console.log(cardText, this.props.cardText);
         this.setState({
             cardText: cardText,
             cardRespText: respText
