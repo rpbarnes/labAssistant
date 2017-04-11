@@ -1,8 +1,6 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 class AddCard extends React.Component {
@@ -11,7 +9,6 @@ class AddCard extends React.Component {
         this.state = {
             editing: false,
             text: '',
-            muiTheme: getMuiTheme({lightBaseTheme})
         }
         this.handleOpen = this.handleOpen.bind(this);
         this.handleDone = this.handleDone.bind(this);
@@ -50,11 +47,9 @@ class AddCard extends React.Component {
 
     handleKeyPress(event) {
         if (event.key === 'Enter') {
-            console.log('pressed enter');
             event.preventDefault();
             this.handleDone(event);
         } else if (event.keyCode === 27) {
-            console.log(event.keyCode);
             event.preventDefault();
             this.handleClose();
         }
@@ -65,7 +60,7 @@ class AddCard extends React.Component {
         if (this.state.editing) {
             // give a text field and button group with 'Done' and 'Cancel'
             return (
-                <div className='well' style={{backgroundColor: this.state.muiTheme.palette.accent1Color}} onKeyDown={this.handleKeyPress}>
+                <div className='primary-text-color' onKeyDown={this.handleKeyPress}>
                     <TextField hintText='Add new...' value={this.state.text} multiLine={true} rows={1} onChange={this.handleEdit} onBlur={this.handleClose} />
                     <div>
                         <FlatButton key='Cancel' label='Cancel' onTouchTap={this.handleClose} />
@@ -89,5 +84,5 @@ class AddCard extends React.Component {
     }
 }
 
-export default muiThemeable()(AddCard);
+export default (AddCard);
 

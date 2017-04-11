@@ -19,8 +19,9 @@ class SectionContainer extends React.Component {
         this.createCard = this.createCard.bind(this);
     }
 
-    handleOpen() {
+    handleOpen(key) {
         // Opens DataEntryModal 
+        // This needs to figure out which card was clicked
         this.setState({modalOpen: true});
     }
 
@@ -56,12 +57,12 @@ class SectionContainer extends React.Component {
         //<RaisedButton label='Open Modal' onTouchTap={this.handleOpen} />
         return (
             <div className='row'>
-                <div className='col-md-4 col-md-offset-4 well'> 
+                <div className='col-lg-8 col-md-offset-2 well light-primary-color text-primary-color'> 
                     <div onClick={this.handleOpen}> 
                         <h2>{this.state.title}</h2>
                     </div>
                     <DataEntryModal cardText={this.state.primaryText} cardRespText={this.state.secondaryText} open={this.state.modalOpen} title={this.state.title} closeModal={this.handleClose} />
-                    <CardDisplay cardText={this.state.primaryText} handleClick={this.handleOpen} />
+                    <CardDisplay cardsToDisplay={this.state.cards} handleClick={this.handleOpen} />
                     <AddCard handleAddCard={(card) => this.createCard(card)}/>
                 </div>
             </div>
