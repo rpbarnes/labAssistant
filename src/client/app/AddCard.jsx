@@ -48,15 +48,20 @@ class AddCard extends React.Component {
             console.log('pressed enter');
             event.preventDefault();
             this.handleDone(event);
+        } else if (event.keyCode === 27) {
+            console.log(event.keyCode);
+            event.preventDefault();
+            this.handleClose();
         }
+
     }
 
     renderAddOrTextEdit() {
         if (this.state.editing) {
             // give a text field and button group with 'Done' and 'Cancel'
             return (
-                <div className='well'>
-                    <TextField hintText='Add new...' value={this.state.text} multiLine={true} rows={1} onKeyPress={this.handleKeyPress} onChange={this.handleEdit} onBlur={this.handleClose} />
+                <div className='well' onKeyDown={this.handleKeyPress}>
+                    <TextField hintText='Add new...' value={this.state.text} multiLine={true} rows={1} onChange={this.handleEdit} onBlur={this.handleClose} />
                     <div>
                         <FlatButton label='Cancel' onTouchTap={this.handleClose} />
                         <FlatButton label='Done' onTouchTap={this.handleDone} />
