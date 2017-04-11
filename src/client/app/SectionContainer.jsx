@@ -9,9 +9,10 @@ class SectionContainer extends React.Component {
         super(props);
         this.state = {
             title:'Section (Change)',
-            primaryText: 'This is new.',
+            primaryText: '',
             secondaryText: '',
             modalOpen: false,
+            cardEditing: {}, // this is the card currently being edited.
             cards: []
         };
         this.handleClose = this.handleClose.bind(this);
@@ -21,47 +22,69 @@ class SectionContainer extends React.Component {
 
     handleOpen(key) {
         // Opens DataEntryModal 
-        // This needs to figure out which card was clicked
-        this.setState({modalOpen: true});
+        // figure out which card was clicked
+        var card = this.state.cards.map( function(card) { // this returns a list...
+            if (card.id === key) {
+                return card;
+            } 
+        });
+        card = card[0];
+        console.log(card.text)
+        this.setState({
+            primaryText: card.text, // why doesn't this update before the next rerender
+            secondaryText: card.response,
+            modalOpen: true,
+            cardEditing: card
+        });
     }
 
     handleClose(child) {
         // Closes DataEntryModal 
         var primaryText = child.state.cardText;
         var secondaryText = child.state.cardRespText;
-        console.log(primaryText);
+        var card = this.state.cardEditing;
+        // pull the card that was edited out of the list.
+        var cards = this.state.cards.filter( function(cardInList) {
+            if (cardInList.id !== card.id) {
+                return cardInList;
+            }
+        });
+        card.text = primaryText;
+        card.response = secondaryText;
+        cards.push(card); // do I need to write card to state?
+        console.log(card)
         this.setState({
             modalOpen: false,
-            primaryText: primaryText,
-            secondaryText: secondaryText 
-        }, function () {
-            this.render(); // this is probably stupid...
-        }
-        );
+            cards: cards
+        });
     }
 
     createCard(text) {
-        console.log('I was called');
         var cards = this.state.cards;
         cards.push({
             text: text,
             response: '',
             id: Date.now(),
+            position: 0, // index of the position in the section.
             checked: false
         });
         this.setState({cards: cards});
-        console.log(cards);
     }
 
     render() {
-        //<RaisedButton label='Open Modal' onTouchTap={this.handleOpen} />
+        // DataEntryModal doesn't rerendered when I change this.state.primaryText. Lets force it to behave properly... I'm not really sure this is a good way of doing this though...
+        let dataModal = null;
+        if (this.state.modalOpen) {
+            dataModal = <DataEntryModal cardText={this.state.primaryText} cardRespText={this.state.secondaryText} open={this.state.modalOpen} title={this.state.title} closeModal={this.handleClose} />;
+        } 
+
         return (
             <div className='row'>
                 <div className='col-lg-8 col-md-offset-2 well light-primary-color text-primary-color'> 
                     <div onClick={this.handleOpen}> 
                         <h2>{this.state.title}</h2>
                     </div>
-                    <DataEntryModal cardText={this.state.primaryText} cardRespText={this.state.secondaryText} open={this.state.modalOpen} title={this.state.title} closeModal={this.handleClose} />
+                    {dataModal}
                     <CardDisplay cardsToDisplay={this.state.cards} handleClick={this.handleOpen} />
                     <AddCard handleAddCard={(card) => this.createCard(card)}/>
                 </div>

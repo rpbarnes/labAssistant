@@ -15,6 +15,7 @@ class DataEntryModal extends React.Component {
         this.cardTextChanged = this.cardTextChanged.bind(this);
         this.cardRespTextChanged = this.cardRespTextChanged.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        console.log(this.props.cardText);
     }
 
 
