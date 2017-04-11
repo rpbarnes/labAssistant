@@ -29,6 +29,7 @@ class AddCard extends React.Component {
         event.preventDefault();
         if (this.state.text !== '') {
             var text = this.state.text;
+            console.log(text);
             this.props.handleAddCard(text);
             this.setState({ text: ''});
         }
