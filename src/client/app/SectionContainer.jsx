@@ -13,7 +13,8 @@ class SectionContainer extends React.Component {
             secondaryText: '',
             modalOpen: false,
             cardEditing: {}, // this is the card currently being edited.
-            cards: []
+            cards: [],
+            numCards: 0
         };
         this.handleClose = this.handleClose.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
@@ -59,6 +60,7 @@ class SectionContainer extends React.Component {
             }
         });
         newCards.push(card); // do I need to write card to state?
+        // Sort the cards based on position
         this.setState({ cards: newCards });
     }
 
@@ -67,19 +69,14 @@ class SectionContainer extends React.Component {
             text: text,
             response: '',
             id: Date.now(),
-            position: 0, // index of the position in the section.
+            position: this.state.numCards, // index of the position in the section.
             checked: false
         };
         this.upDateCards(card);
+        this.setState({numCards: this.state.numCards + 1});
     }
 
     render() {
-        // DataEntryModal doesn't rerendered when I change this.state.primaryText. Lets force it to behave properly... I'm not really sure this is a good way of doing this though...
-        //let dataModal = null;
-        //if (this.state.modalOpen) {
-        //    dataModal = <DataEntryModal cardText={this.state.primaryText} cardRespText={this.state.secondaryText} open={this.state.modalOpen} title={this.state.title} closeModal={this.handleClose} />;
-        //} 
-
         return (
             <div className='row'>
                 <div className='col-lg-8 col-md-offset-2 well light-primary-color text-primary-color'> 

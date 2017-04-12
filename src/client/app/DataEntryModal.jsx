@@ -34,7 +34,7 @@ class DataEntryModal extends React.Component {
         });
     }
     
-    // I'm doing something really stupid but I'm not sure where I'm being stupid... This is a workaround. I think it's probably better to let SectionContainer handle this.
+    // I'm doing something really stupid but I'm not sure where I'm being stupid... This is a workaround. I think it's probably better to let SectionContainer handle the state updates?.
     handleClose() {
         if (this.state.cTChanged) {
             var cardText = this.state.cardText;
@@ -49,7 +49,9 @@ class DataEntryModal extends React.Component {
         console.log(cardText, this.props.cardText);
         this.setState({
             cardText: cardText,
-            cardRespText: respText
+            cardRespText: respText,
+            cRTChanged: false,
+            cTChanged: false
         }, function() {
             this.props.closeModal(this);
         }
