@@ -61,6 +61,13 @@ class SectionContainer extends React.Component {
         });
         newCards.push(card); // do I need to write card to state?
         // Sort the cards based on position
+        newCards.sort( function(a,b) {
+            if (a.position < b.position) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
         this.setState({ cards: newCards });
     }
 
