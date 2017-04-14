@@ -23,6 +23,11 @@ class SectionContainer extends React.Component {
         this.createCard = this.createCard.bind(this);
         this.upDateCards = this.upDateCards.bind(this);
         this.handleEditTitle = this.handleEditTitle.bind(this);
+        // functions for the title editing
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleTextEdit = this.handleTextEdit.bind(this);
     }
 
     handleOpen(key) {
@@ -85,9 +90,36 @@ class SectionContainer extends React.Component {
         this.upDateCards(card);
         this.setState({numCards: this.state.numCards + 1});
     }
+    
+    // functions for editing the title
+    handleEditTitle(event) {
+        this.setState({title: event.target.value});
+    }
 
-    handleEditTitle(text) {
-        this.setState({title: text});
+    handleKeyPress(event) {
+        console.log(event.key);
+        if (event.key == 'Enter') {
+            event.preventDefault();
+            this.handleSubmit(event);
+        } else if (event.key == 'Escape') {
+            event.preventDefault();
+            this.handleSubmit(event);
+        }
+    }
+
+    handleTextEdit(event) {
+        this.setState({title: event.target.value});
+    }
+
+    handleClick() {
+        this.setState({editingTitle: true});
+    }
+
+    handleSubmit(event) {
+        this.setState({
+            editingTitle: false,
+            title: event.target.value
+        })
     }
 
     render() {
@@ -95,7 +127,7 @@ class SectionContainer extends React.Component {
         return (
             <div className='row'>
                 <div className='col-lg-8 col-md-offset-2 well light-primary-color text-primary-color'> 
-                    <TitleDisplay title={this.state.title} setTitle={this.handleEditTitle} />
+                    <TitleDisplay editing={this.state.editingTitle} handleKeyPress={this.handleKeyPress} title={this.state.title} handleTextEdit={this.handleTextEdit} handleSubmit={this.handleSubmit} handleClick={this.handleClick}/>
                     <CardDisplay cardsToDisplay={this.state.cards} handleClick={this.handleOpen} />
                     <DataEntryModal cardText={this.state.primaryText} cardRespText={this.state.secondaryText} open={this.state.modalOpen} title={this.state.title} closeModal={this.handleClose} />
                     <AddCard handleAddCard={(card) => this.createCard(card)}/>
