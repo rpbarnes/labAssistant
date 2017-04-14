@@ -3,12 +3,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DataEntryModal from './DataEntryModal.jsx';
 import CardDisplay from './CardDisplay.jsx';
 import AddCard from './AddCard.jsx';
+import TitleDisplay from './TitleDisplay.jsx';
 
 class SectionContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             title:'Section (Change)',
+            editingTitle: false,
             primaryText: '',
             secondaryText: '',
             modalOpen: false,
@@ -20,6 +22,7 @@ class SectionContainer extends React.Component {
         this.handleOpen = this.handleOpen.bind(this);
         this.createCard = this.createCard.bind(this);
         this.upDateCards = this.upDateCards.bind(this);
+        this.handleEditTitle = this.handleEditTitle.bind(this);
     }
 
     handleOpen(key) {
@@ -83,13 +86,16 @@ class SectionContainer extends React.Component {
         this.setState({numCards: this.state.numCards + 1});
     }
 
+    handleEditTitle(text) {
+        this.setState({title: text});
+    }
+
     render() {
+
         return (
             <div className='row'>
                 <div className='col-lg-8 col-md-offset-2 well light-primary-color text-primary-color'> 
-                    <div onClick={this.handleOpen}> 
-                        <h2>{this.state.title}</h2>
-                    </div>
+                    <TitleDisplay title={this.state.title} setTitle={this.handleEditTitle} />
                     <CardDisplay cardsToDisplay={this.state.cards} handleClick={this.handleOpen} />
                     <DataEntryModal cardText={this.state.primaryText} cardRespText={this.state.secondaryText} open={this.state.modalOpen} title={this.state.title} closeModal={this.handleClose} />
                     <AddCard handleAddCard={(card) => this.createCard(card)}/>
