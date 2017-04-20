@@ -16,7 +16,7 @@ class CardContainer extends React.Component {
     render() {
         return (
             <Card>
-                <CardHeader title={this.props.title}/>
+                <CardHeader windowWidth={this.props.windowWidth} title={this.props.title}/>
             </Card>
         );
     }
@@ -25,7 +25,8 @@ class CardContainer extends React.Component {
 }
 
 CardContainer.defaultProps = {
-    title: 'Experimental Design'
+    title: 'Experimental Design',
+    windowWidth: 1000 
 }
 
 export default CardContainer

@@ -21,7 +21,7 @@ class App extends React.Component {
     render () {
         return (
             <MuiThemeProvider>
-                <CardContainer />
+                <CardContainer windowWidth={this.state.windowWidth} title='Procedure'/>
             </MuiThemeProvider>
         );
     }
