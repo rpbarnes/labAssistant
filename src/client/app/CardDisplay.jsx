@@ -1,4 +1,5 @@
 import React from 'react';
+// OLD This is not used in new version.
 
 class CardDisplay extends React.Component {
     constructor(props) {

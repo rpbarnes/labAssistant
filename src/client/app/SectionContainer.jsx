@@ -97,7 +97,6 @@ class SectionContainer extends React.Component {
     }
 
     handleKeyPress(event) {
-        console.log(event.key);
         if (event.key == 'Enter') {
             event.preventDefault();
             this.handleSubmit(event);

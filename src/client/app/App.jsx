@@ -1,7 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import SectionContainer from './SectionContainer.jsx';
-
+import CardContainer from './CardContainer.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class App extends React.Component {
     render () {
         return (
             <MuiThemeProvider>
-                <SectionContainer />
+                <CardContainer />
             </MuiThemeProvider>
         );
     }
