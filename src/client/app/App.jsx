@@ -5,8 +5,15 @@ import CardContainer from './CardContainer.jsx';
 class App extends React.Component {
     constructor(props) {
         super(props);
+        // find the window width for conditional rendering.
+        var w = window, 
+            d = document, 
+            documentElement = d.documentElement, 
+            width = w.innerWidth || documentElement.clientWidth;
+        console.log(width);
         this.state = {
-            list:''
+            list: '',
+            windowWidth: width,
         };
     } 
 
