@@ -11,9 +11,6 @@ class CardContainer extends React.Component {
     constructor(props) {
         super(props);
         // Do you use relay to populate state variables?
-        this.state = {
-            title: 'Hypothesis'
-        }
     }
 
     render() {
@@ -21,7 +18,7 @@ class CardContainer extends React.Component {
             <div>
                 <CardHeader windowWidth={this.props.windowWidth} title={this.props.title}/>
                 <EditableTextArea />
-                <SimpleCheckList />
+                <SimpleCheckList windowWidth={this.props.windowWidth} />
             </div>
         );
     }
