@@ -34,7 +34,7 @@ class SimpleCheckList extends React.Component {
     createList(item) {
         // for some reason I cannot access the key prop but I can access the id prop?
         return(
-            <SimpleListItem key={item.key} id={item.key} text={item.text} checked={item.checked} editing={item.editing} />
+            <SimpleListItem key={item.key} id={item.key} text={item.text} checked={item.checked} />
         );
     }
 
@@ -50,14 +50,12 @@ class SimpleCheckList extends React.Component {
         }
                     
         return(
-            <div className='row'>
-                <div className='col-md-8'>
-                    <LinearProgress mode='determinate' value={this.state.progress} />
-                    <ul className='list-group'>
-                        {listItems}
-                    </ul>;
-                    {buttonDisp}         
-                </div>
+            <div>
+                <LinearProgress mode='determinate' value={this.state.progress} />
+                <ul className='list-group'>
+                    {listItems}
+                </ul>;
+                {buttonDisp}         
             </div>
         );
     }
@@ -69,8 +67,8 @@ SimpleCheckList.defaultProps = {
     windowWidth: 600,
     breakWidth: 500,
     items: [
-        {key: 12345, text: 'suck nuts captain', checked: true, editing: false },        // should editing really be passed down from the parent?
-        {key: 12346, text: 'bring it on jackass', checked: false, editing: false },
-        {key: 12347, text: 'fairy tails are cool!', checked: false, editing: true }
+        {key: 12345, text: 'suck nuts captain', checked: true},        // moved editing to state variable within the SimpleListItem.
+        {key: 12346, text: 'bring it on jackass', checked: false},
+        {key: 12347, text: 'fairy tails are cool!', checked: false}
     ],
 }

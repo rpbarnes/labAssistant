@@ -13,6 +13,9 @@ import FlatButton from 'material-ui/FlatButton';
 class SimpleListItem extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            editing: false
+        };
     }
 
     onCheckBox(id, event) {
@@ -26,6 +29,7 @@ class SimpleListItem extends React.Component {
         console.log('Edit Button Clicked');
         console.log(id);
         event.preventDefault();
+        this.setState({ editing: true});
     }
 
     onKey(id, event) {
@@ -37,6 +41,7 @@ class SimpleListItem extends React.Component {
         // user is done editing. Exit editing mode
         console.log('done');
         console.log(id);
+        this.setState({ editing: false});
     }
 
     onTextEdit(id, event) {
@@ -45,7 +50,7 @@ class SimpleListItem extends React.Component {
     }
 
     render() {
-        if ( !this.props.editing ) {
+        if ( !this.state.editing ) {
             const iconButtonElement = (
                 <IconButton
                     touch={true}
@@ -84,7 +89,6 @@ SimpleListItem.defaultProps = {
     id: 123456,
     text: 'This is an item',
     checked: false,
-    editing: false
 }
 
 export default SimpleListItem
