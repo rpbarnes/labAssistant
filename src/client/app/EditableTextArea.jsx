@@ -45,7 +45,7 @@ class EditableTextArea extends React.Component{
 }
 
 EditableTextArea.defaultProps = {
-    editing: true, // this is changed by parent who is listening to clicks.
+    editing: false, // this is changed by parent who is listening to clicks.
     text: 'Write text here'
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import CardHeader from './CardHeader.jsx';
 import {Card} from 'material-ui/Card';
 import EditableTextArea from './EditableTextArea.jsx';
+import SimpleCheckList from './SimpleCheckList.jsx';
 
 
 // This is the container for all of the card elements.
@@ -20,6 +21,7 @@ class CardContainer extends React.Component {
             <div>
                 <CardHeader windowWidth={this.props.windowWidth} title={this.props.title}/>
                 <EditableTextArea />
+                <SimpleCheckList />
             </div>
         );
     }
