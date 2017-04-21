@@ -41,7 +41,7 @@ class CardHeader extends React.Component {
                         >
                             <MenuItem primaryText='New Experiment' onClick={this.onNewExperiment.bind(this)}/>
                             <MenuItem primaryText='Comment' onClick={this.onComment.bind(this)}/>
-                            <MenuItem primaryText='Delete Experiment' onClick={this.onComment.bind(this)}/>
+                            <MenuItem primaryText='Delete Experiment' onClick={this.onDelete.bind(this)}/>
                         </IconMenu>
                         
             return(
@@ -56,10 +56,7 @@ class CardHeader extends React.Component {
         } else {
             return(
                 <div>
-                    <AppBar
-                        title={this.props.title}
-                        showMenuIconButton={false}
-                    />
+                    <h2>{this.props.title}</h2>
                 </div>
             );
         }

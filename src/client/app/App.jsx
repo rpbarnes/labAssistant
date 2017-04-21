@@ -1,6 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CardContainer from './CardContainer.jsx';
+import AppBar from 'material-ui/AppBar';
 
 class App extends React.Component {
     constructor(props) {
@@ -21,7 +22,9 @@ class App extends React.Component {
     render () {
         return (
             <MuiThemeProvider>
-                <CardContainer windowWidth={this.state.windowWidth} title='Procedure'/>
+                <div>
+                    <CardContainer windowWidth={this.state.windowWidth} title='Procedure'/>
+                </div>
             </MuiThemeProvider>
         );
     }
